@@ -1,3 +1,9 @@
+# Sorting Visualizer Deployed using Github Pages
+
+Hosted at [Sorting Visualizer](https://abhishekghosh-in.github.io/Sorting-Visualizer-React/)
+
+Visualization implemented for the algorithms: Bubble Sort, Insertion Sort, Merge Sort, Quick Sort
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
