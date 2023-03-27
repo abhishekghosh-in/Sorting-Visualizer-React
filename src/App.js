@@ -8,6 +8,7 @@ import bubble_sort from './Functions/bubble_sort';
 import insertion_sort from './Functions/insertion_sort';
 import merge_sort from './Functions/merge_sort';
 import quick_sort from './Functions/quick_sort';
+import selection_sort from './Functions/selection_sort';
 
 // Array Specifications
 let sizeArray = 20;
@@ -109,6 +110,11 @@ function App() {
     perform_sorting(moves);
   }
 
+  const selection_sort_array = () => {
+    let moves = selection_sort(array);
+    perform_sorting(moves);
+  }
+
   return (
     <div className="background-centeralign">
       <div className="upper-panel">
@@ -117,6 +123,7 @@ function App() {
         <button onClick = {() => insertion_sort_array() } disabled={disableFlag}>Insertion Sort !</button>
         <button onClick = {() => merge_sort_array() } disabled={disableFlag}>Merge Sort !</button>
         <button onClick = {() => quick_sort_array() } disabled={disableFlag}>Quick Sort !</button>
+        <button onClick = {() => selection_sort_array() } disabled={disableFlag}>Selection Sort !</button>
         <label htmlFor="customRange2" className="form-label">Speed</label>
         <input type="range" onChange={(e) => setSpeed(135 - 25*e.currentTarget.value)} min={1} max={5} className="form-range" id="customRange2" disabled = {disableFlag}></input>
       </div>
