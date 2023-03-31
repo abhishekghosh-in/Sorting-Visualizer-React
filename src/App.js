@@ -11,7 +11,6 @@ import quick_sort from './Functions/quick_sort';
 import selection_sort from './Functions/selection_sort';
 
 // Array Specifications
-let sizeArray = 20;
 let minArray = 5;
 let maxArray = 300;
 let firstColor = "orange";
@@ -22,19 +21,26 @@ function App() {
 
   const [disableFlag, setDisableFlag] = useState(false);
   const [speed, setSpeed] = useState(25);
+  const [size, setSize] = useState(10);
 
-  let color_temp = [...Array(sizeArray)].map((_, i) => firstColor);
+  let color_temp = [...Array(size)].map((_, i) => firstColor);
   const [color, setColor] = useState(color_temp);
 
-  let array_temp = generate_array(sizeArray, minArray, maxArray);
+  let array_temp = generate_array(size, minArray, maxArray);
   const [array, setArray] = useState(array_temp);
   useEffect(() => {
     console.log("Array is " + array);
   }, [array]);
 
   const reset_array = () => {
-    array_temp = generate_array(sizeArray, minArray, maxArray);
+    array_temp = generate_array(size, minArray, maxArray);
+    let newColorTemp = [];
+    for(let i = 0; i < size; i++) {
+      newColorTemp.push(firstColor);
+    }
+    color_temp = newColorTemp;
     setArray(array_temp);
+    setColor(color_temp);
   }
 
   const perform_sorting = (moves) => {
@@ -115,6 +121,11 @@ function App() {
     perform_sorting(moves);
   }
 
+  const handle_size_change = (new_size) => {
+    setSize(new_size);
+    reset_array();
+  }
+
   return (
     <div className="background-centeralign">
       <div className="upper-panel">
@@ -127,6 +138,9 @@ function App() {
         <label htmlFor="customRange2" className="form-label">Speed</label>
         <h3>{5 - (speed-5)/20}</h3>
         <input type="range" min='5' max='85' step='20' value={90 - speed} onChange={(e) => setSpeed(90 - e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
+        <label htmlFor="customRange2" className="form-label">Size</label>
+        <h3>{size}</h3>
+        <input type="range" min='5' max='30' value={size} onChange={(e) => handle_size_change(e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
       </div>
       
       <div className="array-bars-space">
