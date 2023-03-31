@@ -21,7 +21,7 @@ let thirdColor = "pink";
 function App() {
 
   const [disableFlag, setDisableFlag] = useState(false);
-  const [speed, setSpeed] = useState(10);
+  const [speed, setSpeed] = useState(25);
 
   let color_temp = [...Array(sizeArray)].map((_, i) => firstColor);
   const [color, setColor] = useState(color_temp);
@@ -125,7 +125,8 @@ function App() {
         <button onClick = {() => quick_sort_array() } disabled={disableFlag}>Quick Sort !</button>
         <button onClick = {() => selection_sort_array() } disabled={disableFlag}>Selection Sort !</button>
         <label htmlFor="customRange2" className="form-label">Speed</label>
-        <input type="range" onChange={(e) => setSpeed(135 - 25*e.currentTarget.value)} min={1} max={5} className="form-range" id="customRange2" disabled = {disableFlag}></input>
+        <h3>{5 - (speed-5)/20}</h3>
+        <input type="range" min='5' max='85' step='20' value={90 - speed} onChange={(e) => setSpeed(90 - e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
       </div>
       
       <div className="array-bars-space">
