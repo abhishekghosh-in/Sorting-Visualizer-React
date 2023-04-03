@@ -1,9 +1,12 @@
 .background-centeralign {
+  background-color: whitesmoke;
   display: flex;
   justify-content: center;
   flex-direction: column;
   width: 70%;
   margin: 1% auto;
+  padding: 2%;
+  height: 80%;
 }
 
 .upper-panel {

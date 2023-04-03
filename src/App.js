@@ -6,9 +6,9 @@ import ArrayBar from './Components/ArrayBar';
 import generate_array from './Functions/generate_array';
 import bubble_sort from './Functions/bubble_sort';
 import insertion_sort from './Functions/insertion_sort';
+import selection_sort from './Functions/selection_sort';
 import merge_sort from './Functions/merge_sort';
 import quick_sort from './Functions/quick_sort';
-import selection_sort from './Functions/selection_sort';
 
 // Array Specifications
 let minArray = 5;
@@ -21,13 +21,15 @@ function App() {
 
   const [disableFlag, setDisableFlag] = useState(false);
   const [speed, setSpeed] = useState(25);
-  const [size, setSize] = useState(10);
+  const [size, setSize] = useState(20);
+  const [selectedOption, setSelectedOption] = useState("bubble");
 
   let color_temp = [...Array(size)].map((_, i) => firstColor);
   const [color, setColor] = useState(color_temp);
 
   let array_temp = generate_array(size, minArray, maxArray);
   const [array, setArray] = useState(array_temp);
+
   useEffect(() => {
     console.log("Array is " + array);
   }, [array]);
@@ -41,6 +43,11 @@ function App() {
     color_temp = newColorTemp;
     setArray(array_temp);
     setColor(color_temp);
+  }
+
+  const handle_size_change = (new_size) => {
+    setSize(new_size);
+    reset_array();
   }
 
   const perform_sorting = (moves) => {
@@ -106,6 +113,11 @@ function App() {
     perform_sorting(moves);
   }
 
+  const selection_sort_array = () => {
+    let moves = selection_sort(array);
+    perform_sorting(moves);
+  }
+
   const merge_sort_array = () => {
     let moves = merge_sort(array);
     perform_sorting(moves);
@@ -116,25 +128,69 @@ function App() {
     perform_sorting(moves);
   }
 
-  const selection_sort_array = () => {
-    let moves = selection_sort(array);
-    perform_sorting(moves);
+  const print_speed = (givenSpeed) => {
+    let speed_category = "Speed";
+    switch(givenSpeed) {
+      case 1:
+        speed_category = "Super Slow";
+        break;
+      case 2:
+        speed_category = "Slow";
+        break;
+      case 3:
+        speed_category = "Moderate";
+        break;
+      case 4:
+        speed_category = "Fast";
+        break;
+      case 5:
+        speed_category = "Super Fast";
+        break;
+      default:
+        speed_category = "Unknown Speed";
+    }
+    return speed_category;
   }
 
-  const handle_size_change = (new_size) => {
-    setSize(new_size);
-    reset_array();
+  const call_sorting_algorithm = () => {
+    switch(selectedOption) {
+      case "bubble":
+        bubble_sort_array();
+        break;
+      case "insertion":
+        insertion_sort_array();
+        break;
+      case "selection":
+        selection_sort_array();
+        break;
+      case "merge":
+        merge_sort_array();
+        break;
+      case "quick":
+        quick_sort_array();
+        break;
+      default:
+        console.log("No sorting algorithm selected");
+    }
   }
 
   return (
     <div className="background-centeralign">
       <div className="upper-panel">
-        <button onClick = {() => reset_array()} disabled={disableFlag}>Generate a new array</button>
-        <button onClick = {() => bubble_sort_array() } disabled={disableFlag}>Bubble Sort !</button>
+        <button onClick = {() => reset_array()} className="btn btn-outline-primary" disabled={disableFlag}>Generate a new array</button>
+        {/* <button onClick = {() => bubble_sort_array() } disabled={disableFlag}>Bubble Sort !</button>
         <button onClick = {() => insertion_sort_array() } disabled={disableFlag}>Insertion Sort !</button>
         <button onClick = {() => merge_sort_array() } disabled={disableFlag}>Merge Sort !</button>
         <button onClick = {() => quick_sort_array() } disabled={disableFlag}>Quick Sort !</button>
-        <button onClick = {() => selection_sort_array() } disabled={disableFlag}>Selection Sort !</button>
+        <button onClick = {() => selection_sort_array() } disabled={disableFlag}>Selection Sort !</button> */}
+        <select className="form-control" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} disabled={disableFlag}>
+          <option value="bubble">Bubble Sort</option>
+          <option value="insertion">Insertion Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="merge">Merge Sort</option>
+          <option value="quick">Quick Sort</option>
+        </select>
+        <button onClick = {() => call_sorting_algorithm()} className="btn btn-outline-success" disabled={disableFlag}>Sort!</button>
         <label htmlFor="customRange2" className="form-label">Speed</label>
         <h3>{5 - (speed-5)/20}</h3>
         <input type="range" min='5' max='85' step='20' value={90 - speed} onChange={(e) => setSpeed(90 - e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
