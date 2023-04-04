@@ -1,31 +1,36 @@
 .background-centeralign {
-  background-color: whitesmoke;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 70%;
-  margin: 1% auto;
+  background-color: #F4E1E1;
+  width: 80%;
+  margin: 2% auto;
   padding: 2%;
-  height: 80%;
+  min-height: 500px;
+  height: 90vh;
 }
 
-.upper-panel {
+.heading-front {
+  color: #579BB1;
+  font-size: 3rem;
+  letter-spacing: 0.5rem;
+  line-height: 1.3;
+  text-align: center;
+  font-variant-caps: small-caps;
+  text-shadow: 0.1rem 0.1rem rgb(148, 148, 148);
+}
+
+.side-panel {
   margin: 1%;
+  padding: 1%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
 }
 
 .array-bars-space {
+  margin: 1%;
+  padding: 1%;
   display: flex;
-  justify-content: center;
   flex-direction: row;
-}
-
-.array-bar {
-  display: inline-block;
-  background-color: "orange";
-  height: "100px";
-  width: "10px";
-  border: "1px solid black"
+  justify-content: center;
+  height: 100%;
 }

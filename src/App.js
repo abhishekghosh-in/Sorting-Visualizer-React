@@ -13,9 +13,9 @@ import quick_sort from './Functions/quick_sort';
 // Array Specifications
 let minArray = 5;
 let maxArray = 300;
-let firstColor = "orange";
-let secondColor = "grey";
-let thirdColor = "pink";
+let firstColor = "#F98903";
+let secondColor = "#C62727";
+let thirdColor = "#FFA6D5";
 
 function App() {
 
@@ -176,33 +176,38 @@ function App() {
 
   return (
     <div className="background-centeralign">
-      <div className="upper-panel">
-        <button onClick = {() => reset_array()} className="btn btn-outline-primary" disabled={disableFlag}>Generate a new array</button>
-        {/* <button onClick = {() => bubble_sort_array() } disabled={disableFlag}>Bubble Sort !</button>
-        <button onClick = {() => insertion_sort_array() } disabled={disableFlag}>Insertion Sort !</button>
-        <button onClick = {() => merge_sort_array() } disabled={disableFlag}>Merge Sort !</button>
-        <button onClick = {() => quick_sort_array() } disabled={disableFlag}>Quick Sort !</button>
-        <button onClick = {() => selection_sort_array() } disabled={disableFlag}>Selection Sort !</button> */}
-        <select className="form-control" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} disabled={disableFlag}>
-          <option value="bubble">Bubble Sort</option>
-          <option value="insertion">Insertion Sort</option>
-          <option value="selection">Selection Sort</option>
-          <option value="merge">Merge Sort</option>
-          <option value="quick">Quick Sort</option>
-        </select>
-        <button onClick = {() => call_sorting_algorithm()} className="btn btn-outline-success" disabled={disableFlag}>Sort!</button>
-        <label htmlFor="customRange2" className="form-label">Speed</label>
-        <h3>{5 - (speed-5)/20}</h3>
-        <input type="range" min='5' max='85' step='20' value={90 - speed} onChange={(e) => setSpeed(90 - e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
-        <label htmlFor="customRange2" className="form-label">Size</label>
-        <h3>{size}</h3>
-        <input type="range" min='5' max='30' value={size} onChange={(e) => handle_size_change(e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
-      </div>
-      
-      <div className="array-bars-space">
-        {array.map((value, index) => {
-          return <ArrayBar key={index} index = {index} value={value} fillcolor = {color[index]}/>;
-        })}
+      <div className="container-fluid">
+        <div className="row">
+          <h1 className="heading-front">Sorting Visualizer Project</h1>
+        </div>
+        <div className="row">
+          <div className="col-4">
+            <div className="side-panel">
+              <button onClick = {() => reset_array()} className="btn btn-outline-primary" disabled={disableFlag}>Reset Array</button>
+              <select className="form-control" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} disabled={disableFlag}>
+                <option value="bubble">Bubble Sort</option>
+                <option value="insertion">Insertion Sort</option>
+                <option value="selection">Selection Sort</option>
+                <option value="merge">Merge Sort</option>
+                <option value="quick">Quick Sort</option>
+              </select>
+              <button onClick = {() => call_sorting_algorithm()} className="btn btn-outline-success" disabled={disableFlag}>Sort!</button>
+              <label htmlFor="customRange2" className="form-label">Speed</label>
+              <h3>{print_speed(5 - (speed-5)/20)}</h3>
+              <input type="range" min='5' max='85' step='20' value={90 - speed} onChange={(e) => setSpeed(90 - e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
+              <label htmlFor="customRange2" className="form-label">Size</label>
+              <h3>{size}</h3>
+              <input type="range" min='5' max='30' value={size} onChange={(e) => handle_size_change(e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
+            </div>
+          </div>
+          <div className="col-8">
+            <div className="array-bars-space">
+              {array.map((value, index) => {
+                return <ArrayBar key={index} index={index} value={value} fillcolor={color[index]}/>;
+              })}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
