@@ -9,10 +9,11 @@ import insertion_sort from './Functions/insertion_sort';
 import selection_sort from './Functions/selection_sort';
 import merge_sort from './Functions/merge_sort';
 import quick_sort from './Functions/quick_sort';
+import heap_sort from './Functions/heap_sort';
 
 // Array Specifications
-let minArray = 5;
-let maxArray = 300;
+let minArray = 20;
+let maxArray = 350;
 let firstColor = "#F98903";
 let secondColor = "#C62727";
 let thirdColor = "#FFA6D5";
@@ -128,6 +129,11 @@ function App() {
     perform_sorting(moves);
   }
 
+  const heap_sort_array = () => {
+    let moves = heap_sort(array);
+    perform_sorting(moves);
+  }
+
   const print_speed = (givenSpeed) => {
     let speed_category = "Speed";
     switch(givenSpeed) {
@@ -169,6 +175,9 @@ function App() {
       case "quick":
         quick_sort_array();
         break;
+      case "heap":
+        heap_sort_array();
+        break;
       default:
         console.log("No sorting algorithm selected");
     }
@@ -183,21 +192,35 @@ function App() {
         <div className="row">
           <div className="col-4">
             <div className="side-panel">
-              <button onClick = {() => reset_array()} className="btn btn-outline-primary" disabled={disableFlag}>Reset Array</button>
-              <select className="form-control" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} disabled={disableFlag}>
-                <option value="bubble">Bubble Sort</option>
-                <option value="insertion">Insertion Sort</option>
-                <option value="selection">Selection Sort</option>
-                <option value="merge">Merge Sort</option>
-                <option value="quick">Quick Sort</option>
-              </select>
-              <button onClick = {() => call_sorting_algorithm()} className="btn btn-outline-success" disabled={disableFlag}>Sort!</button>
-              <label htmlFor="customRange2" className="form-label">Speed</label>
-              <h3>{print_speed(5 - (speed-5)/20)}</h3>
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-12">
+                    <h4 className="text-head">Algorithm: </h4>
+                    <select className="form-control full-width" value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} disabled={disableFlag}>
+                      <option value="bubble">Bubble Sort</option>
+                      <option value="insertion">Insertion Sort</option>
+                      <option value="selection">Selection Sort</option>
+                      <option value="merge">Merge Sort</option>
+                      <option value="quick">Quick Sort</option>
+                      <option value="heap">Heap Sort</option>
+                    </select>
+                  </div>
+                  <div className="col-6">
+                    <button onClick = {() => reset_array()} className="btn btn-outline-primary full-width" disabled={disableFlag}>Reset Array</button>
+                  </div>
+                  <div className="col-6">
+                  <button onClick = {() => call_sorting_algorithm()} className="btn btn-outline-success full-width" disabled={disableFlag}>Sort!</button>
+                  </div>
+                </div>
+              </div>
+              
+              <h4 className="text-head">Speed: </h4>
+              <h4 className="text-head">{print_speed(5 - (speed-5)/20)}</h4>
               <input type="range" min='5' max='85' step='20' value={90 - speed} onChange={(e) => setSpeed(90 - e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
-              <label htmlFor="customRange2" className="form-label">Size</label>
-              <h3>{size}</h3>
+              <h4 className="text-head">Size: </h4>
+              <h4 className="text-head">{size}</h4>
               <input type="range" min='5' max='30' value={size} onChange={(e) => handle_size_change(e.target.value)} className="form-range" id="customRange2" disabled = {disableFlag}></input>
+              
             </div>
           </div>
           <div className="col-8">

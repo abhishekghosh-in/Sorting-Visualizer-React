@@ -19,7 +19,7 @@
 
 .side-panel {
   margin: 1%;
-  padding: 1%;
+  padding: 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,9 +28,19 @@
 
 .array-bars-space {
   margin: 1%;
-  padding: 1%;
+  padding: 5%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   height: 100%;
+}
+
+.full-width {
+  width: 100%;
+  margin: 2%;
+}
+
+.text-head {
+  margin: 2%;
+  padding: 1%;
 }
